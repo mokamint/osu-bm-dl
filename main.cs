@@ -12,12 +12,12 @@ using Newtonsoft.Json.Linq;
 
 namespace osu_bm_dl
 {
-    public partial class Form1 : Form
+    public partial class main : Form
     {
         def defs = new def();
         string amount;
 
-        public Form1()
+        public main()
         {
             InitializeComponent();
         }
