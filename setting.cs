@@ -35,10 +35,6 @@ namespace osu_bm_dl
             {
                 gameFolder.SelectedPath = @"";
             }
-            else
-            {
-                gameFolder.SelectedPath = @"";
-            }
 
             if (first)
             {
