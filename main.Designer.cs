@@ -29,21 +29,29 @@ namespace osu_bm_dl
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(main));
             this.searchQuery = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.bmList = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.displayCount = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.downloadProgress = new System.Windows.Forms.ProgressBar();
             this.setid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.creator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.download = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.displaycnt = new System.Windows.Forms.ToolStripDropDownButton();
+            this.count10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count25 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count50 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count75 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count100 = new System.Windows.Forms.ToolStripMenuItem();
+            this.statuslabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.downloadProgress = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.bmList)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchQuery
@@ -89,60 +97,6 @@ namespace osu_bm_dl
             this.bmList.TabIndex = 2;
             this.bmList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.label1.Location = new System.Drawing.Point(12, 560);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Powered by kitsu.moe";
-            // 
-            // displayCount
-            // 
-            this.displayCount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.displayCount.FormattingEnabled = true;
-            this.displayCount.Items.AddRange(new object[] {
-            "10개",
-            "25개",
-            "50개",
-            "75개",
-            "100개"});
-            this.displayCount.Location = new System.Drawing.Point(797, 555);
-            this.displayCount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.displayCount.Name = "displayCount";
-            this.displayCount.Size = new System.Drawing.Size(71, 23);
-            this.displayCount.TabIndex = 4;
-            this.displayCount.SelectedIndexChanged += new System.EventHandler(this.displayCount_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(734, 559);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "표시 개수";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(794, 14);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 26);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "설정";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
-            // 
-            // downloadProgress
-            // 
-            this.downloadProgress.Location = new System.Drawing.Point(879, 554);
-            this.downloadProgress.Name = "downloadProgress";
-            this.downloadProgress.Size = new System.Drawing.Size(194, 24);
-            this.downloadProgress.TabIndex = 8;
-            // 
             // setid
             // 
             this.setid.Frozen = true;
@@ -187,17 +141,106 @@ namespace osu_bm_dl
             this.download.UseColumnTextForButtonValue = true;
             this.download.Width = 80;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(794, 14);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(74, 26);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "설정";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.statuslabel,
+            this.downloadProgress,
+            this.displaycnt});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 560);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1085, 22);
+            this.statusStrip1.TabIndex = 10;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(126, 17);
+            this.toolStripStatusLabel1.Text = "Powered by kitsu.moe";
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // displaycnt
+            // 
+            this.displaycnt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.displaycnt.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.count100,
+            this.count75,
+            this.count50,
+            this.count25,
+            this.count10});
+            this.displaycnt.Image = ((System.Drawing.Image)(resources.GetObject("displaycnt.Image")));
+            this.displaycnt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.displaycnt.Name = "displaycnt";
+            this.displaycnt.Size = new System.Drawing.Size(72, 20);
+            this.displaycnt.Text = "표시 개수";
+            this.displaycnt.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripDropDownButton1_DropDownItemClicked);
+            // 
+            // count10
+            // 
+            this.count10.Name = "count10";
+            this.count10.Size = new System.Drawing.Size(180, 22);
+            this.count10.Text = "10개";
+            this.count10.Click += new System.EventHandler(this.count10_Click);
+            // 
+            // count25
+            // 
+            this.count25.Name = "count25";
+            this.count25.Size = new System.Drawing.Size(180, 22);
+            this.count25.Text = "25개";
+            // 
+            // count50
+            // 
+            this.count50.Name = "count50";
+            this.count50.Size = new System.Drawing.Size(180, 22);
+            this.count50.Text = "50개";
+            // 
+            // count75
+            // 
+            this.count75.Name = "count75";
+            this.count75.Size = new System.Drawing.Size(180, 22);
+            this.count75.Text = "75개";
+            // 
+            // count100
+            // 
+            this.count100.Name = "count100";
+            this.count100.Size = new System.Drawing.Size(180, 22);
+            this.count100.Text = "100개";
+            // 
+            // statuslabel
+            // 
+            this.statuslabel.Name = "statuslabel";
+            this.statuslabel.Size = new System.Drawing.Size(739, 17);
+            this.statuslabel.Spring = true;
+            this.statuslabel.Text = "대기";
+            this.statuslabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // downloadProgress
+            // 
+            this.downloadProgress.Name = "downloadProgress";
+            this.downloadProgress.Size = new System.Drawing.Size(100, 16);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1085, 589);
-            this.Controls.Add(this.downloadProgress);
+            this.ClientSize = new System.Drawing.Size(1085, 582);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.displayCount);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.bmList);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchQuery);
@@ -211,6 +254,8 @@ namespace osu_bm_dl
             this.Text = "osu! Beatmap downloader";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bmList)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,17 +266,23 @@ namespace osu_bm_dl
         private System.Windows.Forms.TextBox searchQuery;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.DataGridView bmList;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox displayCount;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
-        public System.Windows.Forms.ProgressBar downloadProgress;
         private System.Windows.Forms.DataGridViewTextBoxColumn setid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewTextBoxColumn artist;
         private System.Windows.Forms.DataGridViewTextBoxColumn creator;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewButtonColumn download;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripDropDownButton displaycnt;
+        private System.Windows.Forms.ToolStripMenuItem count100;
+        private System.Windows.Forms.ToolStripMenuItem count75;
+        private System.Windows.Forms.ToolStripMenuItem count50;
+        private System.Windows.Forms.ToolStripMenuItem count25;
+        private System.Windows.Forms.ToolStripMenuItem count10;
+        private System.Windows.Forms.ToolStripStatusLabel statuslabel;
+        private System.Windows.Forms.ToolStripProgressBar downloadProgress;
     }
 }
 

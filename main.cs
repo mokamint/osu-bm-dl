@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net;
+using System.IO;
 
 namespace osu_bm_dl
 {
     public partial class main : Form
     {
         def defs = new def();
-        string amount;
+        string amount = "50";
 
         public main()
         {
@@ -24,7 +26,6 @@ namespace osu_bm_dl
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            displayCount.SelectedIndex = 2;
 
             string gameDir = Properties.Settings.Default.gameDir;
             if (gameDir.Length <= 0)
@@ -95,7 +96,7 @@ namespace osu_bm_dl
                             status = "Loved";
                             break;
                     }
-                    
+
                     // 추가
                     bmList.Rows.Add(setId, title, artist, creator, status);
                     added++;
@@ -115,14 +116,14 @@ namespace osu_bm_dl
         {
             if (e.ColumnIndex == bmList.Columns["download"].Index && e.RowIndex >= 0)
             {
-                MessageBox.Show(bmList.Rows[e.RowIndex].Cells[0].Value.ToString());
-                // defs.fileDownload(bmList.Rows[e.RowIndex].Cells[0].Value.ToString());
+                dlFile(bmList.Rows[e.RowIndex].Cells[0].Value.ToString(), bmList.Rows[e.RowIndex].Cells[1].Value.ToString());
+                bmList.Columns[5].Visible = false;
             }
         }
 
         private void displayCount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            amount = displayCount.SelectedItem.ToString().Replace("개", "");
+            
         }
 
         private void searchQuery_KeyDown(object sender, KeyEventArgs e)
@@ -138,7 +139,48 @@ namespace osu_bm_dl
 
         private void sortList_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
+        }
+        public void dlFile(string sid, String filename)
+        {
+            String path = Properties.Settings.Default.gameDir + @"\" + filename + ".osz";
+
+            WebClient webClient = new WebClient();
+            webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+            webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+            webClient.DownloadFileAsync(new Uri("http://kitsu.moe/d/" + sid), @path);
+        }
+
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            downloadProgress.Value = e.ProgressPercentage;
+            statuslabel.Text = "다운로드 중.. " + e.ProgressPercentage.ToString() + "%";
+        }
+
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            statuslabel.Text = "다운로드 완료!";
+            bmList.Columns[5].Visible = true;
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void count10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripDropDownButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            amount = e.ClickedItem.Text.Replace("개", "");
         }
     }
 }

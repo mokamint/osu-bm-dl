@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
-using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
+using System.ComponentModel;
+using System.Drawing;
 
 namespace osu_bm_dl
 {

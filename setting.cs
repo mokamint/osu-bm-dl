@@ -57,7 +57,7 @@ namespace osu_bm_dl
             else first = true;
         }
 
-        private void setting_FormClosing(object sender, FormClosingEventArgs e)
+        public void setting_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!(Properties.Settings.Default.gameDir.Length > 0))
             {
