@@ -116,5 +116,11 @@ namespace osu_bm_dl
         {
             if (e.KeyCode == Keys.Enter) button1_Click_1(sender, e);
         }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            Form setting = new setting();
+            setting.ShowDialog();
+        }
     }
 }

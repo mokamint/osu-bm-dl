@@ -39,6 +39,8 @@ namespace osu_bm_dl
             this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.creator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.download = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bmList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +54,7 @@ namespace osu_bm_dl
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(714, 12);
+            this.searchButton.Location = new System.Drawing.Point(714, 11);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(74, 21);
             this.searchButton.TabIndex = 1;
@@ -69,10 +71,12 @@ namespace osu_bm_dl
             this.Title,
             this.artist,
             this.creator,
-            this.status});
+            this.status,
+            this.download});
             this.bmList.Location = new System.Drawing.Point(13, 40);
             this.bmList.Name = "bmList";
             this.bmList.ReadOnly = true;
+            this.bmList.RowHeadersWidth = 30;
             this.bmList.RowTemplate.Height = 23;
             this.bmList.Size = new System.Drawing.Size(1060, 398);
             this.bmList.TabIndex = 2;
@@ -115,6 +119,7 @@ namespace osu_bm_dl
             // 
             // Title
             // 
+            this.Title.Frozen = true;
             this.Title.HeaderText = "제목";
             this.Title.Name = "Title";
             this.Title.ReadOnly = true;
@@ -122,6 +127,7 @@ namespace osu_bm_dl
             // 
             // artist
             // 
+            this.artist.Frozen = true;
             this.artist.HeaderText = "아티스트";
             this.artist.Name = "artist";
             this.artist.ReadOnly = true;
@@ -129,21 +135,44 @@ namespace osu_bm_dl
             // 
             // creator
             // 
+            this.creator.Frozen = true;
             this.creator.HeaderText = "제작자";
             this.creator.Name = "creator";
             this.creator.ReadOnly = true;
+            this.creator.Width = 150;
             // 
             // status
             // 
+            this.status.Frozen = true;
             this.status.HeaderText = "상태";
             this.status.Name = "status";
             this.status.ReadOnly = true;
             // 
-            // Form1
+            // download
+            // 
+            this.download.Frozen = true;
+            this.download.HeaderText = "다운로드";
+            this.download.Name = "download";
+            this.download.ReadOnly = true;
+            this.download.Width = 80;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(794, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(74, 21);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "설정";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1085, 473);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.displayCount);
             this.Controls.Add(this.label1);
@@ -152,7 +181,7 @@ namespace osu_bm_dl
             this.Controls.Add(this.searchQuery);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "main";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "osu! Beatmap downloader";
@@ -175,6 +204,8 @@ namespace osu_bm_dl
         private System.Windows.Forms.DataGridViewTextBoxColumn artist;
         private System.Windows.Forms.DataGridViewTextBoxColumn creator;
         private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewButtonColumn download;
+        private System.Windows.Forms.Button button1;
     }
 }
 
