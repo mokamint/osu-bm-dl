@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace osu_bm_dl
 {
@@ -26,14 +29,6 @@ namespace osu_bm_dl
             response.Close();
 
             return responseFromServer;
-        }
-
-        public void fileDownload(string sid)
-        {
-            String path = Properties.Settings.Default.gameDir;
-
-            WebClient mywebClient = new WebClient();
-            mywebClient.DownloadFile("http://mysite.com/myfile.txt", @"d:\myfile.txt");
         }
     }
 }

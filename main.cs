@@ -106,23 +106,17 @@ namespace osu_bm_dl
             }
             catch (Exception ex)
             {
-                MessageBox.Show("오류가 발생했어요 x_x\r" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("오류가 발생했어요 x_x\r\r" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(-1);
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var senderGrid = (DataGridView)sender;
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            if (e.ColumnIndex == bmList.Columns["download"].Index && e.RowIndex >= 0)
             {
-                //TODO - Button Clicked - Execute Code Here
-                DataGridViewRow dgvr = bmList.Rows[e.RowIndex];
-                DataRow row = (dgvr.DataBoundItem as DataRowView).Row;
-
-                String sId = row["setid"].ToString();
-                defs.fileDownload(sId);
+                MessageBox.Show(bmList.Rows[e.RowIndex].Cells[0].Value.ToString());
+                // defs.fileDownload(bmList.Rows[e.RowIndex].Cells[0].Value.ToString());
             }
         }
 

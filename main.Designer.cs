@@ -36,6 +36,7 @@ namespace osu_bm_dl
             this.displayCount = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.downloadProgress = new System.Windows.Forms.ProgressBar();
             this.setid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,6 +80,7 @@ namespace osu_bm_dl
             this.download});
             this.bmList.Location = new System.Drawing.Point(13, 50);
             this.bmList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bmList.MultiSelect = false;
             this.bmList.Name = "bmList";
             this.bmList.ReadOnly = true;
             this.bmList.RowHeadersWidth = 30;
@@ -107,7 +109,7 @@ namespace osu_bm_dl
             "50개",
             "75개",
             "100개"});
-            this.displayCount.Location = new System.Drawing.Point(1002, 555);
+            this.displayCount.Location = new System.Drawing.Point(797, 555);
             this.displayCount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.displayCount.Name = "displayCount";
             this.displayCount.Size = new System.Drawing.Size(71, 23);
@@ -117,7 +119,7 @@ namespace osu_bm_dl
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(939, 560);
+            this.label2.Location = new System.Drawing.Point(734, 559);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 15);
             this.label2.TabIndex = 5;
@@ -133,6 +135,13 @@ namespace osu_bm_dl
             this.button1.Text = "설정";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // downloadProgress
+            // 
+            this.downloadProgress.Location = new System.Drawing.Point(879, 554);
+            this.downloadProgress.Name = "downloadProgress";
+            this.downloadProgress.Size = new System.Drawing.Size(194, 24);
+            this.downloadProgress.TabIndex = 8;
             // 
             // setid
             // 
@@ -174,7 +183,8 @@ namespace osu_bm_dl
             this.download.HeaderText = "다운로드";
             this.download.Name = "download";
             this.download.ReadOnly = true;
-            this.download.Text = "";
+            this.download.Text = "다운로드";
+            this.download.UseColumnTextForButtonValue = true;
             this.download.Width = 80;
             // 
             // main
@@ -182,7 +192,8 @@ namespace osu_bm_dl
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1085, 591);
+            this.ClientSize = new System.Drawing.Size(1085, 589);
+            this.Controls.Add(this.downloadProgress);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.displayCount);
@@ -214,6 +225,7 @@ namespace osu_bm_dl
         private System.Windows.Forms.ComboBox displayCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.ProgressBar downloadProgress;
         private System.Windows.Forms.DataGridViewTextBoxColumn setid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewTextBoxColumn artist;
