@@ -21,10 +21,17 @@ namespace osu_bm_dl
 
         private void button1_Click(object sender, EventArgs e)
         {
+            String username = Environment.GetEnvironmentVariable("username");
+
             FolderBrowserDialog gameFolder = new FolderBrowserDialog();
+            gameFolder.SelectedPath = @"C:\Users\" + username + @"\AppData\Local\";
             if (gameFolder.ShowDialog() == DialogResult.OK)
             {
                 selectGameFolder.Text = gameFolder.SelectedPath;
+            }
+            else
+            {
+                gameFolder.SelectedPath = @"";
             }
 
             if (first)
@@ -45,6 +52,15 @@ namespace osu_bm_dl
                 selectGameFolder.Text = gameDir;
             }
             else first = true;
+        }
+
+        private void setting_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!(Properties.Settings.Default.gameDir.Length > 0))
+            {
+                MessageBox.Show("osu! Songs 폴더 경로를 설정해야 해요!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Cancel = true;
+            }
         }
     }
 }

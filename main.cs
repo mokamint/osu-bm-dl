@@ -25,6 +25,14 @@ namespace osu_bm_dl
         private void Form1_Load(object sender, EventArgs e)
         {
             displayCount.SelectedIndex = 2;
+
+            string gameDir = Properties.Settings.Default.gameDir;
+            if (gameDir.Length <= 0)
+            {
+                MessageBox.Show("처음 실행하셨군요!\rosu! Songs 폴더 경로를 설정하세요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Form setting = new setting();
+                setting.ShowDialog();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,7 +45,7 @@ namespace osu_bm_dl
         {
             if (searchQuery.Text.Length < 3)
             {
-                MessageBox.Show("검색어는 3글자 이상이어야 합니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("검색어는 3글자 이상이어야 해요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -60,6 +68,7 @@ namespace osu_bm_dl
                     String artist = jObject[i]["Artist"].ToString();
                     String creator = jObject[i]["Creator"].ToString();
                     String status = jObject[i]["RankedStatus"].ToString();
+                    String setId = jObject[i]["SetID"].ToString();
 
                     // 비트맵 상태
                     switch (status)
@@ -88,23 +97,33 @@ namespace osu_bm_dl
                     }
                     
                     // 추가
-                    bmList.Rows.Add(title, artist, creator, status);
+                    bmList.Rows.Add(setId, title, artist, creator, status);
                     added++;
                 }
 
-                if (added == 0) MessageBox.Show("검색된 비트맵이 없습니다.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (added == 0) MessageBox.Show("검색된 비트맵이 없어요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 searchButton.Enabled = true; searchButton.Text = "검색";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("오류가 발생했습니다.\r" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("오류가 발생했어요 x_x\r" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(-1);
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            var senderGrid = (DataGridView)sender;
 
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+            {
+                //TODO - Button Clicked - Execute Code Here
+                DataGridViewRow dgvr = bmList.Rows[e.RowIndex];
+                DataRow row = (dgvr.DataBoundItem as DataRowView).Row;
+
+                String sId = row["setid"].ToString();
+                defs.fileDownload(sId);
+            }
         }
 
         private void displayCount_SelectedIndexChanged(object sender, EventArgs e)
@@ -121,6 +140,11 @@ namespace osu_bm_dl
         {
             Form setting = new setting();
             setting.ShowDialog();
+        }
+
+        private void sortList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

@@ -27,5 +27,13 @@ namespace osu_bm_dl
 
             return responseFromServer;
         }
+
+        public void fileDownload(string sid)
+        {
+            String path = Properties.Settings.Default.gameDir;
+
+            WebClient mywebClient = new WebClient();
+            mywebClient.DownloadFile("http://mysite.com/myfile.txt", @"d:\myfile.txt");
+        }
     }
 }
