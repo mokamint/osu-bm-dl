@@ -42,14 +42,16 @@ namespace osu_bm_dl
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.displaycnt = new System.Windows.Forms.ToolStripDropDownButton();
-            this.count10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.count25 = new System.Windows.Forms.ToolStripMenuItem();
-            this.count50 = new System.Windows.Forms.ToolStripMenuItem();
-            this.count75 = new System.Windows.Forms.ToolStripMenuItem();
-            this.count100 = new System.Windows.Forms.ToolStripMenuItem();
             this.statuslabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.downloadProgress = new System.Windows.Forms.ToolStripProgressBar();
+            this.displaycnt = new System.Windows.Forms.ToolStripDropDownButton();
+            this.count100 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count75 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count50 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count25 = new System.Windows.Forms.ToolStripMenuItem();
+            this.count10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.prePage = new System.Windows.Forms.ToolStripSplitButton();
+            this.nextPage = new System.Windows.Forms.ToolStripSplitButton();
             ((System.ComponentModel.ISupportInitialize)(this.bmList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -158,7 +160,9 @@ namespace osu_bm_dl
             this.toolStripStatusLabel1,
             this.statuslabel,
             this.downloadProgress,
-            this.displaycnt});
+            this.displaycnt,
+            this.prePage,
+            this.nextPage});
             this.statusStrip1.Location = new System.Drawing.Point(0, 560);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1085, 22);
@@ -173,6 +177,19 @@ namespace osu_bm_dl
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(126, 17);
             this.toolStripStatusLabel1.Text = "Powered by kitsu.moe";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // statuslabel
+            // 
+            this.statuslabel.Name = "statuslabel";
+            this.statuslabel.Size = new System.Drawing.Size(643, 17);
+            this.statuslabel.Spring = true;
+            this.statuslabel.Text = "대기";
+            this.statuslabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // downloadProgress
+            // 
+            this.downloadProgress.Name = "downloadProgress";
+            this.downloadProgress.Size = new System.Drawing.Size(100, 16);
             // 
             // displaycnt
             // 
@@ -190,49 +207,58 @@ namespace osu_bm_dl
             this.displaycnt.Text = "표시 개수";
             this.displaycnt.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripDropDownButton1_DropDownItemClicked);
             // 
-            // count10
+            // count100
             // 
-            this.count10.Name = "count10";
-            this.count10.Size = new System.Drawing.Size(180, 22);
-            this.count10.Text = "10개";
-            this.count10.Click += new System.EventHandler(this.count10_Click);
-            // 
-            // count25
-            // 
-            this.count25.Name = "count25";
-            this.count25.Size = new System.Drawing.Size(180, 22);
-            this.count25.Text = "25개";
-            // 
-            // count50
-            // 
-            this.count50.Name = "count50";
-            this.count50.Size = new System.Drawing.Size(180, 22);
-            this.count50.Text = "50개";
+            this.count100.Name = "count100";
+            this.count100.Size = new System.Drawing.Size(107, 22);
+            this.count100.Text = "100개";
             // 
             // count75
             // 
             this.count75.Name = "count75";
-            this.count75.Size = new System.Drawing.Size(180, 22);
+            this.count75.Size = new System.Drawing.Size(107, 22);
             this.count75.Text = "75개";
             // 
-            // count100
+            // count50
             // 
-            this.count100.Name = "count100";
-            this.count100.Size = new System.Drawing.Size(180, 22);
-            this.count100.Text = "100개";
+            this.count50.Name = "count50";
+            this.count50.Size = new System.Drawing.Size(107, 22);
+            this.count50.Text = "50개";
             // 
-            // statuslabel
+            // count25
             // 
-            this.statuslabel.Name = "statuslabel";
-            this.statuslabel.Size = new System.Drawing.Size(739, 17);
-            this.statuslabel.Spring = true;
-            this.statuslabel.Text = "대기";
-            this.statuslabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.count25.Name = "count25";
+            this.count25.Size = new System.Drawing.Size(107, 22);
+            this.count25.Text = "25개";
             // 
-            // downloadProgress
+            // count10
             // 
-            this.downloadProgress.Name = "downloadProgress";
-            this.downloadProgress.Size = new System.Drawing.Size(100, 16);
+            this.count10.Name = "count10";
+            this.count10.Size = new System.Drawing.Size(107, 22);
+            this.count10.Text = "10개";
+            this.count10.Click += new System.EventHandler(this.count10_Click);
+            // 
+            // prePage
+            // 
+            this.prePage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.prePage.DropDownButtonWidth = 0;
+            this.prePage.Image = ((System.Drawing.Image)(resources.GetObject("prePage.Image")));
+            this.prePage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.prePage.Name = "prePage";
+            this.prePage.Size = new System.Drawing.Size(48, 20);
+            this.prePage.Text = "< 이전";
+            this.prePage.ButtonClick += new System.EventHandler(this.prePage_ButtonClick);
+            // 
+            // nextPage
+            // 
+            this.nextPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.nextPage.DropDownButtonWidth = 0;
+            this.nextPage.Image = ((System.Drawing.Image)(resources.GetObject("nextPage.Image")));
+            this.nextPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nextPage.Name = "nextPage";
+            this.nextPage.Size = new System.Drawing.Size(48, 20);
+            this.nextPage.Text = "다음 >";
+            this.nextPage.ButtonClick += new System.EventHandler(this.nextPage_ButtonClick);
             // 
             // main
             // 
@@ -284,6 +310,8 @@ namespace osu_bm_dl
         private System.Windows.Forms.ToolStripMenuItem count10;
         private System.Windows.Forms.ToolStripStatusLabel statuslabel;
         private System.Windows.Forms.ToolStripProgressBar downloadProgress;
+        private System.Windows.Forms.ToolStripSplitButton prePage;
+        private System.Windows.Forms.ToolStripSplitButton nextPage;
     }
 }
 

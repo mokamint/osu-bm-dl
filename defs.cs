@@ -29,5 +29,28 @@ namespace osu_bm_dl
 
             return responseFromServer;
         }
+
+        public String bmStatus(String status)
+        {
+            switch (status)
+            {
+                case "-1":
+                    return "WIP (제작 중)";                    
+                case "-2":
+                    return "Graveyard";                    
+                case "0":
+                    return "Pending";                   
+                case "1":
+                    return "Ranked";                    
+                case "2":
+                    return "Approved";                    
+                case "3":
+                    return "Qualified";                   
+                case "4":
+                    return "Loved";
+                default:
+                    return "None";
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace osu_bm_dl
     {
         def defs = new def();
         string amount = "50";
+        int page = 1;
 
         public main()
         {
@@ -26,7 +27,7 @@ namespace osu_bm_dl
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            // 첫 실행시 설정 필요
             string gameDir = Properties.Settings.Default.gameDir;
             if (gameDir.Length <= 0)
             {
@@ -38,12 +39,12 @@ namespace osu_bm_dl
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String a = defs.getRequest("http://example.com");
-            MessageBox.Show(a);
+           
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            // 검색어 예외
             if (searchQuery.Text.Length < 3)
             {
                 MessageBox.Show("검색어는 3글자 이상이어야 해요.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -54,12 +55,11 @@ namespace osu_bm_dl
             bmList.Rows.Clear();
             bmList.Refresh();
 
-            // json 받아오기
             try
             {
-                // 버튼 비활성화
+                // json 받아오기
                 searchButton.Text = "검색 중"; searchButton.Enabled = false;
-                String json = defs.getRequest("https://kitsu.moe/api/search?amount=" + amount + "&query=" + searchQuery.Text);
+                String json = defs.getRequest("https://kitsu.moe/api/search?amount=" + amount + "&query=" + searchQuery.Text + "&offset=" + (Convert.ToInt32(amount) * (page - 1)).ToString());
                 JArray jObject = JArray.Parse(json);
 
                 int added = 0;
@@ -72,30 +72,7 @@ namespace osu_bm_dl
                     String setId = jObject[i]["SetID"].ToString();
 
                     // 비트맵 상태
-                    switch (status)
-                    {
-                        case "-1":
-                            status = "WIP (제작 중)";
-                            break;
-                        case "-2":
-                            status = "Graveyard";
-                            break;
-                        case "0":
-                            status = "Pending";
-                            break;
-                        case "1":
-                            status = "Ranked";
-                            break;
-                        case "2":
-                            status = "Approved";
-                            break;
-                        case "3":
-                            status = "Qualified";
-                            break;
-                        case "4":
-                            status = "Loved";
-                            break;
-                    }
+                    status = defs.bmStatus(status);
 
                     // 추가
                     bmList.Rows.Add(setId, title, artist, creator, status);
@@ -107,7 +84,7 @@ namespace osu_bm_dl
             }
             catch (Exception ex)
             {
-                MessageBox.Show("오류가 발생했어요 x_x\r\r" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("오류가 발생했어요!\r\r" + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(-1);
             }
         }
@@ -118,6 +95,8 @@ namespace osu_bm_dl
             {
                 dlFile(bmList.Rows[e.RowIndex].Cells[0].Value.ToString(), bmList.Rows[e.RowIndex].Cells[1].Value.ToString());
                 bmList.Columns[5].Visible = false;
+                statuslabel.Text = "다운로드 중.. 0%";
+                downloadProgress.Value = 0;
             }
         }
 
@@ -143,6 +122,7 @@ namespace osu_bm_dl
         }
         public void dlFile(string sid, String filename)
         {
+            // 파일 다운로드
             String path = Properties.Settings.Default.gameDir + @"\" + filename + ".osz";
 
             WebClient webClient = new WebClient();
@@ -153,12 +133,14 @@ namespace osu_bm_dl
 
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
+            // 다운로드 퍼센티지 표시
             downloadProgress.Value = e.ProgressPercentage;
             statuslabel.Text = "다운로드 중.. " + e.ProgressPercentage.ToString() + "%";
         }
 
         private void Completed(object sender, AsyncCompletedEventArgs e)
         {
+            // 다운로드 완료
             statuslabel.Text = "다운로드 완료!";
             bmList.Columns[5].Visible = true;
         }
@@ -180,7 +162,27 @@ namespace osu_bm_dl
 
         private void toolStripDropDownButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            // 표시 갯수 변경
             amount = e.ClickedItem.Text.Replace("개", "");
+        }
+
+        private void prePage_ButtonClick(object sender, EventArgs e)
+        {
+            if (page > 1)
+            {
+                page -= 1;
+                button1_Click_1(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("이미 마지막 페이지에요!", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }    
+        }
+
+        private void nextPage_ButtonClick(object sender, EventArgs e)
+        {
+            page += 1;
+            button1_Click_1(sender, e);
         }
     }
 }
